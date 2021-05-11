@@ -56,7 +56,25 @@ const copyFile = (fileName) => {
     })
 };
 
-copyFile(`data.txt`);
+const post1 = JSON.stringify({
+    title: "JavaScript Basics",
+    body: "This post contains information about javaScript ",
+    userId: 1,
+  });
+  
+  const createPost = (post) => {
+    axios.post("https://jsonplaceholder.typicode.com/posts", post)
+    .then ((response)=>{
+        // parseResponse=JSON.parse(response.data)
+        console.log(response.data);
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  };
+  
+createPost(post1);
+
 app.listen(PORT, ()=>{
     console.log("hello world");
 })
