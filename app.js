@@ -31,17 +31,32 @@ const getPost = (id) => {
     .catch((err)=>{
         throw err
     })
-  };
+};
 
 const getPostAsync = async (data) => {
     try {
         const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${data}`)
-        console.log(`response.data`);
+        console.log(response.data);
     } catch (err){
         throw err
     }
 };
 
+const appendToFile = (data) => {
+    fs.appendFile("data.txt", data, (err)=>{
+        if (err) throw err;
+        console.log('The "data to append" was appended to file!');
+    });
+}
+
+const copyFile = (fileName) => {
+    fs.copyFile(fileName, `copy_of_${fileName}`, (err)=>{
+        if (err) throw err;
+        console.log(`done`);
+    })
+};
+
+copyFile(`data.txt`);
 app.listen(PORT, ()=>{
     console.log("hello world");
 })
