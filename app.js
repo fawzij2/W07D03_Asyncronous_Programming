@@ -70,8 +70,9 @@ const post1 = JSON.stringify({
   const createPost = (post) => {
     axios.post("https://jsonplaceholder.typicode.com/posts", post)
     .then ((response)=>{
-        // parseResponse=JSON.parse(response.data)
-        console.log(response.data);
+        const response_string = JSON.stringify(response.data);
+        const response_string2 = JSON.parse(response_string);
+        console.log(response_string2);
     })
     .catch((err)=>{
         console.log(err);
@@ -80,7 +81,7 @@ const post1 = JSON.stringify({
 
 // 4.
 const newPost = JSON.stringify({
-    // the post id that we want to update, change it when trying to update another post
+    
     id: 1,
     title: "Updated Title",
     body: "Updated body",
@@ -90,7 +91,9 @@ const newPost = JSON.stringify({
 const updatePost = (postId, data) => {
     axios.put(`https://jsonplaceholder.typicode.com/posts/${postId}`,data)
     .then((response)=>{
-        console.log(response.data);
+        const response_string = JSON.stringify(response.data);
+        const response_string2 = JSON.parse(response_string);
+        console.log(response_string2);
     })
     .catch((err)=>{
         console.log(err);
@@ -100,8 +103,14 @@ const updatePost = (postId, data) => {
 // 5. 
 const getUsers = async () => {
     await axios.get(`https://jsonplaceholder.typicode.com/users`)
-    .then((response)=>{console.log(response.data);})
-    .catch((err) =>{console.log(err);})
+    .then((response)=>{
+        const response_string = JSON.stringify(response.data);
+        const response_string2 = JSON.parse(response_string);
+        console.log(response_string2);
+    })
+    .catch((err) =>{
+        console.log(err);
+    })
   };
 
 
@@ -111,7 +120,7 @@ const saveUsers = () => {
     axios.get(`https://jsonplaceholder.typicode.com/users`)
     .then((response)=>{
         const response_string = JSON.stringify(response.data);
-        const response_string2 = JSON.parse(response_string)
+        const response_string2 = JSON.parse(response_string);
         console.log(response_string2);
         fs.writeFile("users.txt", response_string, (err)=>{
             if (err) throw err;
