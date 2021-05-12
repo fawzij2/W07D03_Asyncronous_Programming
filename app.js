@@ -1,7 +1,8 @@
 const express = require("express");
 const axios = require("axios");
 const fs = require("fs");
-const { response } = require("express");
+const { response, json } = require("express");
+const { throws } = require("assert");
 
 const app = express();
 const PORT = 3000;
@@ -103,7 +104,26 @@ const getUsers = async () => {
     .catch((err) =>{console.log(err);})
   };
 
-getUsers()
+
+
+// 6.
+const saveUsers = () => {
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then((response)=>{
+        const response_string = JSON.stringify(response.data);
+        const response_string2 = JSON.parse(response_string)
+        console.log(response_string2);
+        fs.writeFile("users.txt", response_string, (err)=>{
+            if (err) throw err;
+            console.log('The data was added to file!');
+        });
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+  };
+
+saveUsers();
 
 app.listen(PORT, ()=>{
     console.log("hello world");
