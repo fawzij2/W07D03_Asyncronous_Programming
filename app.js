@@ -42,6 +42,8 @@ const getPostAsync = async (data) => {
     }
 };
 
+// Practice
+// 1.
 const appendToFile = (data) => {
     fs.appendFile("data.txt", data, (err)=>{
         if (err) throw err;
@@ -49,6 +51,7 @@ const appendToFile = (data) => {
     });
 }
 
+// 2. 
 const copyFile = (fileName) => {
     fs.copyFile(fileName, `copy_of_${fileName}`, (err)=>{
         if (err) throw err;
@@ -56,6 +59,7 @@ const copyFile = (fileName) => {
     })
 };
 
+// 3. 
 const post1 = JSON.stringify({
     title: "JavaScript Basics",
     body: "This post contains information about javaScript ",
@@ -73,6 +77,7 @@ const post1 = JSON.stringify({
     })
   };
 
+// 4.
 const newPost = JSON.stringify({
     // the post id that we want to update, change it when trying to update another post
     id: 1,
@@ -91,7 +96,14 @@ const updatePost = (postId, data) => {
     })
 };
 
-updatePost(1, newPost);
+// 5. 
+const getUsers = async () => {
+    await axios.get(`https://jsonplaceholder.typicode.com/users`)
+    .then((response)=>{console.log(response.data);})
+    .catch((err) =>{console.log(err);})
+  };
+
+getUsers()
 
 app.listen(PORT, ()=>{
     console.log("hello world");
